@@ -1,5 +1,15 @@
 {
     "name": "daycry/encryption",
+    "description": "Encryption for Codeigniter 4",
+    "authors":
+    [
+        {
+            "name": "daycry",
+            "homepage": "https://github.com/daycry",
+            "role": "Developer"
+        }
+    ],
+    "license": "MIT",
     "require": {
       "php": ">=7.2"
     },
