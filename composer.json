@@ -1,0 +1,11 @@
+{
+    "name": "daycry/encryption",
+    "require": {
+      "php": ">=7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Daycry\\Encryption\\": "src/"
+        }
+    }
+}
