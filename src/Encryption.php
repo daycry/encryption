@@ -1,5 +1,5 @@
 <?php
-namespace Daycry\RestServer\Libraries;
+namespace Daycry\Encryption;
 
 class Encryption
 {
