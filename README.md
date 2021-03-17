@@ -30,4 +30,8 @@ $encryption = new \Daycry\Encryption\Encryption();
 $data = $encryption->encrypt( 'data' );
 var_dump( $data );
 
+$encryption = new \Daycry\Encryption\Encryption();
+$data = $encryption->decrypt( 'data' );
+var_dump( $data );
+
 ```
