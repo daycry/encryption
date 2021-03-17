@@ -35,3 +35,12 @@ $data = $encryption->decrypt( 'data' );
 var_dump( $data );
 
 ```
+
+## How Run Tests
+
+```php
+cd vendor\daycry\encryption\
+composer install
+vendor\bin\phpunit
+
+```
