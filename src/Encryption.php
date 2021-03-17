@@ -1,11 +1,23 @@
 <?php
 namespace Daycry\Encryption;
 
+use CodeIgniter\Config\BaseConfig;
+
 class Encryption
 {
+    private $config = null;
+
+    public function __construct( BaseConfig $config = null )
+    {
+        if( !is_null( $config ) )
+        {
+            $this->config = $config;
+        }
+    }
+
     public function encrypt( $data, $url_safe = true, $mode = 'CTR' )
     {
-        $config = self::_getConfig( $mode );
+        $config = $this->_getConfig( $mode );
 
         $cipherText = base64_encode( \Config\Services::encrypter( $config )->encrypt( $data ) );
 
@@ -24,7 +36,7 @@ class Encryption
             $data = str_replace( array( '-', '_', '~' ), array( '+', '/', '=' ), $data );
         }
 
-        $config = self::_getConfig( $mode );
+        $config = $this->_getConfig( $mode );
 
         $plainText = \Config\Services::encrypter( $config )->decrypt( base64_decode( $data ) );
 
@@ -56,15 +68,23 @@ class Encryption
         return json_encode($data);
     }
 
-    private static function _getConfig( $mode )
+    private function _getConfig( $mode )
     {
-        $config = new \Config\Encryption();
-
-        if( $mode == 'ECB' )
+        if( $this->config == null )
         {
-            $config->cipher = 'AES-256-ECB';
-        }
+            $config = new \Config\Encryption();
 
-        return $config;
+            if( $mode == 'ECB' )
+            {
+                $config->cipher = 'AES-256-ECB';
+            }
+
+            return $config;
+
+        }else{
+
+            $this->config->cipher = 'AES-256-ECB';
+            return $this->config;
+        }
     }
 }
