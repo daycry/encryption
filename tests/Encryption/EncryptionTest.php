@@ -11,34 +11,42 @@ class EncryptionTest extends TestCase
         parent::setUpBeforeClass();
     }
 
-    public function testEncryptDecrypt()
+    public function testCTR()
     {
-
         $config = config( 'Encryption' );
-        $config->key = '%T3sT1nG$';
 
         $obj = new \Daycry\Encryption\Encryption( $config );
+        $obj->setCipher( 'AES-256-CTR' );
+        $obj->setKey( '%T3sT1nG$' );
 
-        $encrypt = $obj->encrypt( 'hola', true, 'ECB' );
+        $encrypt = $obj->encrypt( 'hola', true );
 
-        $decrypt = $obj->decrypt( $encrypt, true, 'ECB' );
+        $decrypt = $obj->decrypt( $encrypt, true );
 
         $this->assertEquals( 'hola', $decrypt );
 
     }
 
+    public function testECB()
+    {
+        $config = config( 'Encryption' );
+
+        $obj = new \Daycry\Encryption\Encryption( $config );
+        $obj->setCipher( 'AES-256-ECB' );
+        $obj->setKey( '%T3sT1nG$' );
+
+        $encrypt = $obj->encrypt( 'hola', true );
+        $encryptAnother = $obj->encrypt( 'hola', true );
+
+        $decrypt = $obj->decrypt( $encrypt, true );
+
+        $this->assertEquals( 'hola', $decrypt );
+        $this->assertEquals( $encryptAnother, $encrypt );
+
+    }
+
     public function testAddFunctionsRunsOnlyOnce()
     {
-        $obj = new \Daycry\Encryption\Encryption();
-
-        $ref_obj = new ReflectionObject( $obj );
-        $ref_property = $ref_obj->getProperty( 'config' );
-        $ref_property->setAccessible( true );
-        $config = $ref_property->getValue( $obj );
-
-        $this->assertEquals( null, $config );
-
-
         $config = config( 'Encryption' );
         $config->key = '%T3sT1nG$';
 
@@ -47,7 +55,6 @@ class EncryptionTest extends TestCase
         $ref_property = $ref_obj->getProperty( 'config' );
         $ref_property->setAccessible( true );
         $configClass = $ref_property->getValue( $obj );
-
 
         $this->assertEquals( $configClass, $config );
     }

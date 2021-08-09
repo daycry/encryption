@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Encryption" tests="3" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.013640">
+    <testsuite name="Daycry\Encryption\Test\EncryptionTest" file="C:\Users\46066917X\Documents\GitHub\encryption\tests\Encryption\EncryptionTest.php" tests="3" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.013640">
+      <testcase name="testCTR" class="Daycry\Encryption\Test\EncryptionTest" classname="Daycry.Encryption.Test.EncryptionTest" file="C:\Users\46066917X\Documents\GitHub\encryption\tests\Encryption\EncryptionTest.php" line="14" assertions="1" time="0.013137"/>
+      <testcase name="testECB" class="Daycry\Encryption\Test\EncryptionTest" classname="Daycry.Encryption.Test.EncryptionTest" file="C:\Users\46066917X\Documents\GitHub\encryption\tests\Encryption\EncryptionTest.php" line="30" assertions="2" time="0.000345"/>
+      <testcase name="testAddFunctionsRunsOnlyOnce" class="Daycry\Encryption\Test\EncryptionTest" classname="Daycry.Encryption.Test.EncryptionTest" file="C:\Users\46066917X\Documents\GitHub\encryption\tests\Encryption\EncryptionTest.php" line="48" assertions="1" time="0.000158"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
