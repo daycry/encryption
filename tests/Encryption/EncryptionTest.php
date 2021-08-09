@@ -16,10 +16,7 @@ class EncryptionTest extends TestCase
         $config = config( 'Encryption' );
 
         $obj = new \Daycry\Encryption\Encryption( $config );
-        $obj->setCipher( 'AES-256-CTR' );
-        $obj->setKey( '%T3sT1nG$' );
-
-        $encrypt = $obj->encrypt( 'hola', true );
+        $encrypt = $obj->setCipher( 'AES-256-CTR' )->setKey( '%T3sT1nG$' )->encrypt( 'hola', true );
 
         $decrypt = $obj->decrypt( $encrypt, true );
 

@@ -36,6 +36,31 @@ var_dump( $data );
 
 ```
 
+## Setting Cipher algoritm
+
+```php
+$encryption = new \Daycry\Encryption\Encryption();
+$data = $encryption->setCipher( 'AES-256-CTR' )->encrypt( 'data' );
+var_dump( $data );
+
+```
+
+## Setting Key
+
+```php
+$encryption = new \Daycry\Encryption\Encryption();
+$encrypt = $obj->setCipher( 'AES-256-CTR' )->setKey( '%T3sT1nG$' )->encrypt( 'data', true );
+var_dump( $data );
+
+```
+
+## Get algoritm available
+
+```php
+var_dump( openssl_get_cipher_methods() );
+
+```
+
 ## How Run Tests
 
 ```php
