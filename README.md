@@ -1,4 +1,4 @@
-# Encryption Library
+# Encryption Library [![](https://github.com/daycry/encryption/workflows/PHP%20Tests/badge.svg)](https://github.com/daycry/encryption/actions?query=workflow%3A%22PHP+Tests%22)
 
 Encryption for Codeigniter 4
 
