@@ -1,8 +1,8 @@
 <?php
 
-namespace Daycry\Encryption\Test;
+namespace Test;
 
-use ReflectionObject;
+use Tests\Support\TestCase;
 
 class EncryptionTest extends TestCase
 {
@@ -40,19 +40,5 @@ class EncryptionTest extends TestCase
         $this->assertEquals( 'hola', $decrypt );
         $this->assertEquals( $encryptAnother, $encrypt );
 
-    }
-
-    public function testAddFunctionsRunsOnlyOnce()
-    {
-        $config = config( 'Encryption' );
-        $config->key = '%T3sT1nG$';
-
-        $obj = new \Daycry\Encryption\Encryption( $config );
-        $ref_obj = new ReflectionObject( $obj );
-        $ref_property = $ref_obj->getProperty( 'config' );
-        $ref_property->setAccessible( true );
-        $configClass = $ref_property->getValue( $obj );
-
-        $this->assertEquals( $configClass, $config );
     }
 }

@@ -63,6 +63,23 @@ var_dump( openssl_get_cipher_methods() );
 
 ```
 
+## CryptoJs Compatibility Returning Key
+
+```php
+$result = \Daycry\Encryption\CryptoJsAes::encrypt( "Hello", "123456", true );
+
+$textPlain = \Daycry\Encryption\CryptoJsAes::decrypt( $result );
+```
+
+## CryptoJs Compatibility Without Returning Key
+
+```php
+$result = \Daycry\Encryption\CryptoJsAes::encrypt( "Hello", "123456", false );
+
+$textPlain = \Daycry\Encryption\CryptoJsAes::decrypt( $result, "123456" );
+```
+
+
 ## How Run Tests
 
 ```php

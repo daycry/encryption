@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="./vendor/codeigniter4/framework/system/Test/bootstrap.php"
-     backupGlobals="false"
-     colors="true"
-     convertErrorsToExceptions="true"
-     convertNoticesToExceptions="true"
-     convertWarningsToExceptions="true"
-     stopOnError="false"
-     stopOnFailure="false"
-     stopOnIncomplete="false"
-     stopOnSkipped="false">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		bootstrap="vendor/codeigniter4/framework/system/Test/bootstrap.php"
+		backupGlobals="false"
+		colors="true"
+		convertErrorsToExceptions="true"
+		convertNoticesToExceptions="true"
+		convertWarningsToExceptions="true"
+		stopOnError="false"
+		stopOnFailure="false"
+		stopOnIncomplete="false"
+		stopOnSkipped="false"
+		xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+
+    <coverage includeUncoveredFiles="true" processUncoveredFiles="true">
+		<include>
+			<directory suffix=".php">./src</directory>
+		</include>
+
+		<report>
+			<clover outputFile="build/clover.xml"/>
+			<html outputDirectory="build/html"/>
+			<php outputFile="build/coverage.serialized"/>
+			<text outputFile="php://stdout" showUncoveredFiles="false"/>
+		</report>
+	</coverage>
 
     <testsuites>
         <testsuite name="Encryption">
-            <directory suffix="Test.php">tests</directory>
+            <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
 
     <logging>
-        <log type="coverage-html" target="build/coverage"/>
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
-        <log type="junit" target="build/logs/junit.xml"/>
-    </logging>
-
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
+		<testdoxHtml outputFile="build/testdox.html"/>
+		<testdoxText outputFile="build/testdox.txt"/>
+		<junit outputFile="build/logfile.xml"/>
+	</logging>
 
     <php>
         <server name="app.baseURL" value="http://localhost/"/>
