@@ -1,0 +1,11 @@
+<script type="text/javascript" src="<?php echo base_url("assets/js/jquery.min.js")?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/crypto-js.min.js")?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/encryption.js")?>"></script>
+
+<script>
+	Encryption.getInstance().setKey("hello");
+	var encrypted = Encryption.getInstance().encrypt("hello text");
+	console.log(encrypted);
+	var decrypted = Encryption.getInstance().decrypt(encrypted);
+	console.log(decrypted);
+</script>
