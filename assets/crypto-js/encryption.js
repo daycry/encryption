@@ -62,14 +62,16 @@ var Encryption = (function($) {
         return result;
     }
 
-    var encrypt = function( data )
+    var encrypt = function( data, key )
     {
-        if( __key === null )
+        key = (typeof key !== 'undefined') ?  key : __key;
+
+        if( key === null )
         {
-            __key = randomString(10);
+            key = randomString(10);
         }
         var length = ( encryptMethodLength() / 4 );
-        var hashKey = CryptoJS.PBKDF2( __key, __salt, {'hasher': CryptoJS.algo.SHA512, 'keySize': ( length / 8), 'iterations': __iterations } );
+        var hashKey = CryptoJS.PBKDF2( key, __salt, {'hasher': CryptoJS.algo.SHA512, 'keySize': ( length / 8), 'iterations': __iterations } );
 
         var encrypted = CryptoJS.AES.encrypt(data, hashKey, { 'format': __cryptoJSAesJson, 'mode': CryptoJS.mode.CBC, 'iv': __iv, 'salt': __salt } );
         
@@ -78,7 +80,7 @@ var Encryption = (function($) {
             'iv': CryptoJS.enc.Hex.stringify(__iv),
             's': CryptoJS.enc.Hex.stringify(__salt),
             'iterations': __iterations,
-            'k': CryptoJS.enc.Hex.stringify( CryptoJS.enc.Utf8.parse(__key) )
+            'k': CryptoJS.enc.Hex.stringify( CryptoJS.enc.Utf8.parse(key) )
         };
 
         return JSON.stringify(output);

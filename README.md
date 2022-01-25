@@ -62,6 +62,7 @@ var_dump( $data );
 var_dump( openssl_get_cipher_methods() );
 
 ```
+________________________________________________________________________________________________________________
 
 ## CryptoJs Compatibility Returning Key
 
@@ -78,7 +79,27 @@ $result = \Daycry\Encryption\CryptoJsAes::encrypt( "Hello", "123456", false );
 
 $textPlain = \Daycry\Encryption\CryptoJsAes::decrypt( $result, "123456" );
 ```
+If you want encrypt/decrypt in javascript you must add this files in your view.
 
+```php
+./public/assets
+
+```
+Example:
+
+```html
+<script type="text/javascript" src="<?php echo base_url("assets/js/jquery.min.js")?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/crypto-js.min.js")?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/encryption.js")?>"></script>
+
+<script>
+	Encryption.getInstance().setKey("hello");
+	var encrypted = Encryption.getInstance().encrypt("hello text");
+	var decrypted = Encryption.getInstance().decrypt(encrypted);
+	console.log(decrypted);
+</script>
+```
+Encrypt and descrypt function accept the key as second parameter.
 
 ## How Run Tests
 
