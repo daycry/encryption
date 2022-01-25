@@ -93,6 +93,11 @@ class CryptoJsAes
     {
         $number = filter_var(self::$encryptMethod, FILTER_SANITIZE_NUMBER_INT);
 
+        if( !is_numeric( substr( $number, -1 ) ) )
+        {
+            $number = substr($number, 0, -1);
+        }
+
         return intval(abs($number));
     }
 }
