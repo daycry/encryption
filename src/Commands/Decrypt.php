@@ -8,12 +8,12 @@ use CodeIgniter\CLI\CLI;
 class Decrypt extends BaseCommand
 {
     protected $group       = 'Encryption';
-    protected $name        = 'check:hash';
-    protected $description = 'Decrypt hash.';
-    protected $usage = 'decrypt:identifier <hash> [options]';
+    protected $name        = 'encryption:check';
+    protected $description = 'Encrypt/Decrypt data.';
+    protected $usage = 'encryption:check <data> [options]';
 
     protected $arguments = [
-        'hash' => 'Hash for decrypt',
+        'data' => 'Data for encrypt or decrypt',
     ];
     protected $options = [ '-mode' => 'Set cipher mode', '-key' => 'Set key', 'method' => 'Encrypt or Decrypt' ];
 
@@ -22,10 +22,10 @@ class Decrypt extends BaseCommand
         try {
             $config = new \Config\Encryption();
 
-            $hash = array_shift($params);
+            $data = array_shift($params);
 
-            if (empty($hash)) {
-                $hash = CLI::prompt('Insert hash', null, 'required'); // @codeCoverageIgnore
+            if (empty($data)) {
+                $data = CLI::prompt('Insert hash', null, 'required'); // @codeCoverageIgnore
             }
 
             $mode = $params[ 'mode' ] ?? CLI::getOption('mode');
@@ -45,8 +45,7 @@ class Decrypt extends BaseCommand
             }
 
             $encryption = new \Daycry\Encryption\Encryption($config);
-            $text = call_user_func([ $encryption, $method ], $hash, true);
-            //$text = $encryption->decrypt( $hash, true );
+            $text = call_user_func([ $encryption, $method ], $data, true);
 
             CLI::write($text, 'green');
         } catch (\Exception $ex) {
