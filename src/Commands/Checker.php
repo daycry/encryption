@@ -5,7 +5,7 @@ namespace Daycry\Encryption\Commands;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 
-class Decrypt extends BaseCommand
+class Checker extends BaseCommand
 {
     protected $group       = 'Encryption';
     protected $name        = 'encryption:check';
