@@ -13,32 +13,30 @@ class EncryptionTest extends TestCase
 
     public function testCTR()
     {
-        $config = config( 'Encryption' );
+        $config = config('Encryption');
 
-        $obj = new \Daycry\Encryption\Encryption( $config );
-        $encrypt = $obj->setCipher( 'AES-256-CTR' )->setKey( '%T3sT1nG$' )->encrypt( 'hola', true );
+        $obj = new \Daycry\Encryption\Encryption($config);
+        $encrypt = $obj->setCipher('AES-256-CTR')->setKey('%T3sT1nG$')->encrypt('hola', true);
 
-        $decrypt = $obj->decrypt( $encrypt, true );
+        $decrypt = $obj->decrypt($encrypt, true);
 
-        $this->assertEquals( 'hola', $decrypt );
-
+        $this->assertEquals('hola', $decrypt);
     }
 
     public function testECB()
     {
-        $config = config( 'Encryption' );
+        $config = config('Encryption');
 
-        $obj = new \Daycry\Encryption\Encryption( $config );
-        $obj->setCipher( 'AES-256-ECB' );
-        $obj->setKey( '%T3sT1nG$' );
+        $obj = new \Daycry\Encryption\Encryption($config);
+        $obj->setCipher('AES-256-ECB');
+        $obj->setKey('%T3sT1nG$');
 
-        $encrypt = $obj->encrypt( 'hola', true );
-        $encryptAnother = $obj->encrypt( 'hola', true );
+        $encrypt = $obj->encrypt('hola', true);
+        $encryptAnother = $obj->encrypt('hola', true);
 
-        $decrypt = $obj->decrypt( $encrypt, true );
+        $decrypt = $obj->decrypt($encrypt, true);
 
-        $this->assertEquals( 'hola', $decrypt );
-        $this->assertEquals( $encryptAnother, $encrypt );
-
+        $this->assertEquals('hola', $decrypt);
+        $this->assertEquals($encryptAnother, $encrypt);
     }
 }

@@ -12,6 +12,6 @@ if (! function_exists('encryption_instance')) {
      */
     function encryption_instance(BaseConfig $config = null)
     {
-        return new \Daycry\Encryption\Encryption( $config );
+        return new \Daycry\Encryption\Encryption($config);
     }
 }

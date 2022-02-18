@@ -1,6 +1,6 @@
 <?php
 
-namespace Daycry\Encryption;
+namespace Daycry\Encryption\Libraries;
 
 use CodeIgniter\Config\BaseConfig;
 
