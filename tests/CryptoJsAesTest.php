@@ -2,12 +2,17 @@
 
 namespace Test;
 
-use Tests\Support\TestCase;
+use CodeIgniter\Test\CIUnitTestCase;
 
-class CryptoJsAesTest extends TestCase
+class CryptoJsAesTest extends CIUnitTestCase
 {
     protected $value = "Hello!";
     protected $password = "hello";
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+    }
 
     public static function setUpBeforeClass(): void
     {
@@ -53,5 +58,12 @@ class CryptoJsAesTest extends TestCase
         $textPlain = \Daycry\Encryption\CryptoJsAes::decrypt($result);
 
         $this->assertFalse($textPlain);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->resetServices();
     }
 }

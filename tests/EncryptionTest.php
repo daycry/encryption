@@ -2,10 +2,15 @@
 
 namespace Test;
 
-use Tests\Support\TestCase;
+use CodeIgniter\Test\CIUnitTestCase;
 
-class EncryptionTest extends TestCase
+class EncryptionTest extends CIUnitTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+    }
+
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
@@ -38,5 +43,12 @@ class EncryptionTest extends TestCase
 
         $this->assertEquals('hola', $decrypt);
         $this->assertEquals($encryptAnother, $encrypt);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->resetServices();
     }
 }

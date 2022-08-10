@@ -3,12 +3,12 @@
 namespace Test;
 
 use Daycry\Encryption\Encryption;
-use Tests\Support\TestCase;
+use CodeIgniter\Test\CIUnitTestCase;
 
 /**
  * @internal
  */
-final class HelperTest extends TestCase
+final class HelperTest extends CIUnitTestCase
 {
     protected function setUp(): void
     {
@@ -20,5 +20,12 @@ final class HelperTest extends TestCase
     public function testReturnsServiceByDefault()
     {
         $this->assertInstanceOf(Encryption::class, encryption_instance());
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->resetServices();
     }
 }
