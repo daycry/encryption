@@ -1,8 +1,15 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?business=SYC5XDT23UZ5G&no_recurring=0&item_name=Thank+you%21&currency_code=EUR)
 
-# Encryption Library [![](https://github.com/daycry/encryption/workflows/PHP%20Tests/badge.svg)](https://github.com/daycry/encryption/actions?query=workflow%3A%22PHP+Tests%22)
+# Encryption Library
 
-Encryption for Codeigniter 4
+Encryption for Codeigniter 4 compatibility with CryptoJsAes
+
+[![Build Status](https://github.com/daycry/encryption/workflows/PHP%20Tests/badge.svg)](https://github.com/daycry/encryption/actions?query=workflow%3A%22PHP+Tests%22)
+[![Coverage Status](https://coveralls.io/repos/github/daycry/encryption/badge.svg?branch=master)](https://coveralls.io/github/daycry/encryption?branch=master)
+[![Downloads](https://poser.pugx.org/daycry/encryption/downloads)](https://packagist.org/packages/daycry/encryption)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/daycry/encryption)](https://packagist.org/packages/daycry/encryption)
+[![GitHub stars](https://img.shields.io/github/stars/daycry/encryption)](https://packagist.org/packages/daycry/encryption)
+[![GitHub license](https://img.shields.io/github/license/daycry/encryption)](https://github.com/daycry/encryption/blob/master/LICENSE)
 
 ## Installation via composer
 
