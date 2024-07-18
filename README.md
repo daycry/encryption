@@ -4,7 +4,7 @@
 
 Encryption for Codeigniter 4 compatibility with CryptoJsAes
 
-[![Build Status](https://github.com/daycry/encryption/workflows/PHP%20Tests/badge.svg)](https://github.com/daycry/encryption/actions?query=workflow%3A%22PHP+Tests%22)
+**[![Build Status](https://github.com/daycry/encryption/workflows/PHP%20Tests/badge.svg)](https://github.com/daycry/encryption/actions?query=workflow%3A%22PHP+Tests%22)**
 [![Coverage Status](https://coveralls.io/repos/github/daycry/encryption/badge.svg?branch=master)](https://coveralls.io/github/daycry/encryption?branch=master)
 [![Downloads](https://poser.pugx.org/daycry/encryption/downloads)](https://packagist.org/packages/daycry/encryption)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/daycry/encryption)](https://packagist.org/packages/daycry/encryption)
