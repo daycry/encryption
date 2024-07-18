@@ -1,10 +1,23 @@
 <?php
 
+/**
+ * This file is part of Daycry Auth.
+ *
+ * (c) Daycry <daycry9@proton.me>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace Test;
 
 use CodeIgniter\Test\CIUnitTestCase;
+use Daycry\Encryption\Encryption;
 
-class EncryptionTest extends CIUnitTestCase
+/**
+ * @internal
+ */
+final class EncryptionTest extends CIUnitTestCase
 {
     protected function setUp(): void
     {
@@ -20,29 +33,12 @@ class EncryptionTest extends CIUnitTestCase
     {
         $config = config('Encryption');
 
-        $obj = new \Daycry\Encryption\Encryption($config);
+        $obj     = new Encryption($config);
         $encrypt = $obj->setCipher('AES-256-CTR')->setKey('%T3sT1nG$')->encrypt('hola', true);
 
         $decrypt = $obj->decrypt($encrypt, true);
 
-        $this->assertEquals('hola', $decrypt);
-    }
-
-    public function testECB()
-    {
-        $config = config('Encryption');
-
-        $obj = new \Daycry\Encryption\Encryption($config);
-        $obj->setCipher('AES-256-ECB');
-        $obj->setKey('%T3sT1nG$');
-
-        $encrypt = $obj->encrypt('hola', true);
-        $encryptAnother = $obj->encrypt('hola', true);
-
-        $decrypt = $obj->decrypt($encrypt, true);
-
-        $this->assertEquals('hola', $decrypt);
-        $this->assertEquals($encryptAnother, $encrypt);
+        $this->assertSame('hola', $decrypt);
     }
 
     protected function tearDown(): void

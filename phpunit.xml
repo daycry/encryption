@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		bootstrap="vendor/codeigniter4/framework/system/Test/bootstrap.php"
-		backupGlobals="false"
-		colors="true"
-		convertErrorsToExceptions="true"
-		convertNoticesToExceptions="true"
-		convertWarningsToExceptions="true"
-		stopOnError="false"
-		stopOnFailure="false"
-		stopOnIncomplete="false"
-		stopOnSkipped="false"
-		xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+    bootstrap="vendor/codeigniter4/framework/system/Test/bootstrap.php"
+    backupGlobals="false"
+    beStrictAboutOutputDuringTests="true"
+    colors="true"
+    columns="max"
+    failOnRisky="true"
+    failOnWarning="true"
+    cacheDirectory="build/.phpunit.cache">
 
-    <coverage includeUncoveredFiles="true" processUncoveredFiles="true">
-		<include>
-			<directory suffix=".php">./src</directory>
-		</include>
-        <exclude>
-			<directory suffix=".php">./src/Commands</directory>
-		</exclude>
+    <coverage
+		includeUncoveredFiles="true"
+		pathCoverage="false"
+		ignoreDeprecatedCodeUnits="true"
+		disableCodeCoverageIgnore="true">
 		<report>
 			<clover outputFile="build/logs/clover.xml"/>
-			<html outputDirectory="build/logs/html"/>
-			<php outputFile="build/logs/coverage.serialized"/>
-			<text outputFile="php://stdout" showUncoveredFiles="false"/>
+			<html outputDirectory="build/coverage/html" highLowerBound="80"/>
+			<text outputFile="build/coverage/coverage.txt"/>
 		</report>
 	</coverage>
 
@@ -32,13 +28,25 @@
             <directory suffix="Test.php">tests</directory>
         </testsuite>
     </testsuites>
-
+	<extensions>
+		<bootstrap class="Nexus\PHPUnit\Tachycardia\TachycardiaExtension">
+			<parameter name="time-limit" value="0.50" />
+			<parameter name="report-count" value="30" />
+		</bootstrap>
+	</extensions>
     <logging>
 		<testdoxHtml outputFile="build/logs/testdox.html"/>
 		<testdoxText outputFile="build/logs/testdox.txt"/>
 		<junit outputFile="build/logs/logfile.xml"/>
 	</logging>
-
+	<source>
+		<include>
+			<directory suffix=".php">./src/</directory>
+		</include>
+		<exclude>
+			<directory suffix=".php">./src/Commands</directory>
+		</exclude>
+	</source>
     <php>
         <server name="app.baseURL" value="http://localhost/"/>
 

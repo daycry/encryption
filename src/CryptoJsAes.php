@@ -1,29 +1,44 @@
 <?php
 
+/**
+ * This file is part of Daycry Auth.
+ *
+ * (c) Daycry <daycry9@proton.me>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace Daycry\Encryption;
+
+use Exception;
 
 class CryptoJsAes
 {
     /**
-     * @link http://php.net/manual/en/function.openssl-get-cipher-methods.php Available methods.
+     * @see http://php.net/manual/en/function.openssl-get-cipher-methods.php Available methods.
+     *
      * @var string Cipher method. Recommended AES-128-CBC, AES-192-CBC, AES-256-CBC
      */
     protected static $encryptMethod = 'AES-256-CBC';
 
     /**
      * Encrypt any value
-     * @param mixed $value Any value
+     *
+     * @param mixed  $value      Any value
      * @param string $passphrase Your password
+     * @param mixed  $returnKey
+     *
      * @return string
      */
     public static function encrypt($value, string $passphrase, $returnKey = true)
     {
         $ivLength = openssl_cipher_iv_length(self::$encryptMethod);
-        $iv = openssl_random_pseudo_bytes($ivLength);
+        $iv       = openssl_random_pseudo_bytes($ivLength);
 
-        $salt = openssl_random_pseudo_bytes(256);
+        $salt       = openssl_random_pseudo_bytes(256);
         $iterations = 999;
-        $hashKey = hash_pbkdf2('sha512', $passphrase, $salt, $iterations, (self::encryptMethodLength() / 4));
+        $hashKey    = hash_pbkdf2('sha512', $passphrase, $salt, $iterations, (self::encryptMethodLength() / 4));
 
         $encryptedString = openssl_encrypt($value, self::$encryptMethod, hex2bin($hashKey), OPENSSL_RAW_DATA, $iv);
 
@@ -33,7 +48,7 @@ class CryptoJsAes
         $output = ['ct' => $encryptedString, 'iv' => bin2hex($iv), 's' => bin2hex($salt), 'iterations' => $iterations];
 
         if ($returnKey) {
-            $output["k"] = bin2hex($passphrase);
+            $output['k'] = bin2hex($passphrase);
         }
 
         unset($encryptedString, $iterations, $iv, $ivLength, $salt);
@@ -43,8 +58,10 @@ class CryptoJsAes
 
     /**
      * Decrypt a previously encrypted value
-     * @param string $jsonStr Json stringified value
+     *
+     * @param string $jsonStr    Json stringified value
      * @param string $passphrase Your password
+     *
      * @return mixed
      */
     public static function decrypt(string $jsonStr, ?string $passphrase = '')
@@ -52,21 +69,21 @@ class CryptoJsAes
         $json = json_decode($jsonStr, true);
 
         try {
-            $salt = hex2bin($json["s"]);
-            $iv = hex2bin($json["iv"]);
-        } catch (\Exception $e) {
+            $salt = hex2bin($json['s']);
+            $iv   = hex2bin($json['iv']);
+        } catch (Exception $e) {
             return null;
         }
 
-        if (isset($json["k"])) {
-            $passphrase = hex2bin($json["k"]);
+        if (isset($json['k'])) {
+            $passphrase = hex2bin($json['k']);
         }
 
-        $cipherText = base64_decode($json['ct']);
+        $cipherText = base64_decode($json['ct'], true);
 
         $iterations = 999;
         if (isset($json['iterations'])) {
-            $iterations = intval(abs($json['iterations']));
+            $iterations = (int) (abs($json['iterations']));
             if ($iterations <= 0) {
                 $iterations = 999;
             }
@@ -84,16 +101,16 @@ class CryptoJsAes
     /**
      * Get encrypt method length number (128, 192, 256).
      *
-     * @return integer.
+     * @return int.
      */
-    protected static function encryptMethodLength()
+    protected static function encryptMethodLength(): int
     {
         $number = filter_var(self::$encryptMethod, FILTER_SANITIZE_NUMBER_INT);
 
-        if (!is_numeric(substr($number, -1))) {
+        if (! is_numeric(substr($number, -1))) {
             $number = substr($number, 0, -1);
         }
 
-        return intval(abs($number));
+        return (int) (abs($number));
     }
 }
